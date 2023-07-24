@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class MatchItem : MonoBehaviour
 {
     [SerializeField] private GameObject _item1, _item2;
+    [SerializeField] private int _matchedItems;
 
     public void Match(GameObject gameObject)
     {
@@ -27,10 +28,15 @@ public class MatchItem : MonoBehaviour
         {
             Debug.Log("Matched!!");
             //GameManager.GetTime
-            //M
-
             _item1 = null;
             _item2=null;
+
+            _matchedItems++;
+            if (_matchedItems == 8)
+            {
+                Debug.Log("Won game!");
+            }
+
         }
         else if (_item1.tag != _item2.tag)
         {
