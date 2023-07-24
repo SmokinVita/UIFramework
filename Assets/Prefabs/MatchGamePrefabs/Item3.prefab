@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3767373309554443998}
   m_Layer: 5
   m_Name: Item3
-  m_TagString: Untagged
+  m_TagString: Item3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemID: 2
   _coverImage: {fileID: 2949288999706294924}
+  _itemMatch: {fileID: 0}
 --- !u!1 &6309625056176196673
 GameObject:
   m_ObjectHideFlags: 0
