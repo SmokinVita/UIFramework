@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,31 +15,56 @@ public class GameManager : MonoBehaviour
 
             return _instance;
         }
+
     }
 
-    [SerializeField] private TMP_Text _timeText;
-    private float _seconds;
-    private int _minuteCounter, _hourCounter;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private List<string> _profiles = new List<string>();
+    [SerializeField] private string _currentProfile;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        Timer();
-    }
-
-    private void Timer()
-    {
-        _seconds += Time.deltaTime;
-        _timeText.SetText($"{_minuteCounter}:{(int)_seconds}");
-        if (_seconds > 60f)
+        if (_instance == null)
         {
-            _minuteCounter++;
-            _seconds = 0;
+            DontDestroyOnLoad(this);
+            _instance = this;
         }
+        if (_instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void CreateProfile(string profile)
+    {
+        PlayerPrefs.SetString(profile, profile);
+        _profiles.Add(profile);
+        _currentProfile = profile;
+    }
+
+    public void LoadProfile(string profile)
+    {
+        PlayerPrefs.GetString(profile, profile);
+        _currentProfile = profile;
+    }
+
+    public List<string> GetAllProfiles()
+    {
+        return _profiles;
+    }
+
+    public string ReturnCurrentProfile()
+    {
+        Debug.Log("Returned: " +  _currentProfile);
+        return _currentProfile;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadScene(int sceneId)
+    {
+        SceneManager.LoadScene(sceneId);
     }
 }

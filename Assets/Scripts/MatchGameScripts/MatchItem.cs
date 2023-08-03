@@ -1,15 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using TMPro;
 
 public class MatchItem : MonoBehaviour
 {
-    [SerializeField] private GameObject _item1, _item2;
+    [Header("MatchItems Variables!")]
+    [SerializeField] private GameObject _item1;
+    [SerializeField] private GameObject _item2;
     [SerializeField] private int _matchedItems;
+
+
+    //Timer
+    [Header("Variables for Timer")]
+    [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private ItemSpawn _itemSpawner;
+    [SerializeField] private float _finalTime;
+    private bool _isTimerActive = false;
+    private float _seconds;
+    private int _minutes;
+
+
+    //WinScreen
+    [Header("Win Screen Settings!")]
+    [SerializeField] private TMP_Text _finalTimeText;
+    [SerializeField] private TMP_Text _quickestTimeText;
+    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private float _fastestTime;
+
+
+    private void Start()
+    {
+        _isTimerActive = true;
+        if (_itemSpawner == null)
+        {
+            Debug.LogError("Item Spawn is NULL!");
+        }
+
+
+
+    }
+
+    private void Update()
+    {
+        Timer();
+    }
 
     public void Match(GameObject gameObject)
     {
+        //Set selected object to Item slot for comparison.
         if (_item1 == null)
         {
             _item1 = gameObject;
@@ -24,37 +63,68 @@ public class MatchItem : MonoBehaviour
             return;
         }
 
-        if (_item1.tag == _item2.tag)
+        if (_item1.name == _item2.name)
         {
-            Debug.Log("Matched!!");
-            //GameManager.GetTime
             _item1 = null;
-            _item2=null;
+            _item2 = null;
 
             _matchedItems++;
-            if (_matchedItems == 8)
+            if (_matchedItems == _itemSpawner.PairsToWin())
             {
-                Debug.Log("Won game!");
-            }
+                _isTimerActive = false;
 
+            }
         }
-        else if (_item1.tag != _item2.tag)
+        else if (_item1.name != _item2.name)
         {
-            Debug.Log("Did not match!!");
             StartCoroutine(CoverRoutine());
         }
+    }
 
+    public void Timer()
+    {
+        if (_isTimerActive == false)
+        {
+            _finalTime = _minutes + _seconds;
+            GameWon();
+            return;
+        }
+
+        _seconds += Time.deltaTime;
+
+        _timerText.SetText($"{(int)_seconds}");
+
+    }
+
+    private void GameWon()
+    {
+
+        _winScreen.SetActive(true);
+        _finalTimeText.SetText($"{(int)_seconds}");
+
+        _fastestTime = PlayerPrefs.GetFloat(GameManager.Instance.ReturnCurrentProfile() + "FastestTime");
+
+
+        if (_finalTime < _fastestTime || _fastestTime == 0)
+        {
+            PlayerPrefs.SetFloat(GameManager.Instance.ReturnCurrentProfile() + "FastestTime", _finalTime);
+            Debug.Log(PlayerPrefs.GetFloat(GameManager.Instance.ReturnCurrentProfile() + "FastestTime"));
+            _quickestTimeText.SetText($"{(int)_finalTime}");
+        }
+        else
+        {
+            Debug.Log("Not Quicker");
+            _quickestTimeText.SetText($"{(int)_fastestTime}");
+        }
     }
 
     IEnumerator CoverRoutine()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         _item1.GetComponent<Item>().CoverItem(false);
         yield return new WaitForEndOfFrame();
-        _item2.GetComponent <Item>().CoverItem(false);
-        _item1= null;
-        _item2=null;
+        _item2.GetComponent<Item>().CoverItem(false);
+        _item1 = null;
+        _item2 = null;
     }
-
-    
 }
