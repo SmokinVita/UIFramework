@@ -10,7 +10,6 @@ public class Drop : MonoBehaviour, IDropHandler
     [SerializeField] private DragAndDropGame _game;
     [SerializeField] private string _hiraganaNeeded;
     private Image _image;
-    
 
     // Start is called before the first frame update
     void Start()
@@ -20,22 +19,16 @@ public class Drop : MonoBehaviour, IDropHandler
         if (_game == null)
             Debug.LogError("DragAndDropGame is NULL!");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag.name == _hiraganaNeeded)
         {
             eventData.pointerDrag.GetComponent<Drag>()._startPOS = _image.rectTransform.position;
-            _game.Points(3);
+            _game.Points(3, false);
             _game.CorrectSelection();
         }
         else
-            _game.Points(-2);
+            _game.Points(-2, true);
     }
 }
