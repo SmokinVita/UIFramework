@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class UIManager : MonoBehaviour
             return _instance;
         }
     }
-    [SerializeField] private Scrollbar _scrollBar;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private string _selectedProfile;
+
+    [SerializeField] private AudioMixer _audioMixer;
+    [SerializeField] private Slider _sfxSlider;
+    [SerializeField] private Slider _musicSlider;
 
 
     private void Awake()
@@ -38,25 +42,18 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void AdjustSliderToRight()
+    public void SFXVolume()
     {
-        _scrollBar.value += .5f;
-        
+        _audioMixer.SetFloat("SFXMixer", _sfxSlider.value);
     }
 
-    public void AdjustLeft()
+    public void MusicVolume()
     {
-        _scrollBar.value -= .5f;
-
-        if (_scrollBar.value < 0)
-        {
-            _scrollBar.value = .1f;
-        }
+        _audioMixer.SetFloat("MusicMixer", _musicSlider.value);
     }
-
 
     public void CreateProfile()
     {
