@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Drag&Drop.unity
     guid: b0e207872c27bfd4cb384e50c8c1865b
+  - enabled: 1
+    path: Assets/Scenes/MathGame.unity
+    guid: cf395cb49f7307248bfa0c03216bcd6c
   m_configObjects: {}
