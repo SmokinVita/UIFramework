@@ -19,9 +19,17 @@ public class UIManager : MonoBehaviour
             return _instance;
         }
     }
+    [SerializeField] private GameObject _titlePage;
+
+    [SerializeField] private GameObject _gameSelectionMenu;
+    [SerializeField] private TMP_Text _debugText;
+
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private string _selectedProfile;
+    [SerializeField] private TMP_Text _profileDebugText;
+    [SerializeField] private GameObject _profilePage;
+    [SerializeField] private LoadProfileList _loadProfileList;
 
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _sfxSlider;
@@ -36,14 +44,23 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _profileDebugText.SetText("");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadGameSelectionMenu()
     {
-
+        if (GameManager.Instance.ReturnCurrentProfile() == "")
+        {
+            _debugText.gameObject.SetActive(true);
+            return;
+        }
+        else
+        {
+            _gameSelectionMenu.SetActive(true);
+        }
     }
+
+
 
     public void SFXVolume()
     {
@@ -57,8 +74,35 @@ public class UIManager : MonoBehaviour
 
     public void CreateProfile()
     {
+        //go through profile list and verify new profile doesn't already exist
+        foreach (var item in GameManager.Instance.GetAllProfiles())
+        {
+            if (_inputField.text == item)
+            {
+                _profileDebugText.SetText("Profile Already Exist! Create another please!");
+                _profileDebugText.text = "";
+                return;
+            }
+        }
+
+        //verifies profile name is longer than 2 characters
+        if (_inputField.text.Length < 3)
+        {
+            _profileDebugText.SetText("Please create a profile with more than three Characters!");
+            _inputField.text = "";
+            return;
+        }
+
+        //Calls Gamemanager Create Profile, add's profile name to Load Profile page. Clear's out inputfield text. 
         GameManager.Instance.CreateProfile(_inputField.text);
+        _loadProfileList.CreatedProfile(_inputField.text);
         Debug.Log($"New Profile " + _inputField.text);
+        _inputField.text = "";
+        
+        //clear's out debug text, than disables Profile Page and activates Title Page
+        _profileDebugText.SetText("");
+        _profilePage.SetActive(false);
+        _titlePage.SetActive(true);
     }
 
     public void LoadProfile(GameObject profile)

@@ -1111,6 +1111,7 @@ MonoBehaviour:
   _debugText: {fileID: 202143410}
   _maxAnswers: 5
   _nextAnswerButton: {fileID: 884060185}
+  _checkAnswerButton: {fileID: 1416991251}
   _finalScore: 0
   _highscore: 0
   _finalScoreText: {fileID: 2909209863544119129}

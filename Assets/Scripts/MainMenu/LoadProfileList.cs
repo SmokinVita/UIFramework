@@ -8,12 +8,10 @@ public class LoadProfileList : MonoBehaviour
     [SerializeField] private GameObject _profileTemplate;
     [SerializeField] private TMP_Text _text;
 
-    private void OnEnable()
+    public void CreatedProfile(string profileName)
     {
-        foreach (var profile in GameManager.Instance.GetAllProfiles())
-        {
-            GameObject currentList = Instantiate(_profileTemplate, transform);
-            currentList.GetComponentInChildren<TMP_Text>().SetText(profile);
-        }
+        GameObject currentList = Instantiate(_profileTemplate, transform);
+        currentList.GetComponentInChildren<TMP_Text>().SetText(profileName);
     }
+
 }

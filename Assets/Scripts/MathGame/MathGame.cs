@@ -13,7 +13,7 @@ public class MathGame : MonoBehaviour
 
     [SerializeField] private TMP_Text _scoreText, _debugText;
     [SerializeField] private int _maxAnswers;
-    [SerializeField] private Button _nextAnswerButton;
+    [SerializeField] private Button _nextAnswerButton, _checkAnswerButton;
     private int _amountOfQuestions, _score;
 
 
@@ -47,6 +47,9 @@ public class MathGame : MonoBehaviour
         _correctAnswer = _number1 + _number2;
 
         _input.text = "";
+        _input.readOnly = false;
+
+        _checkAnswerButton.interactable = true;
     }
 
     public void CheckAnswer()
@@ -58,17 +61,22 @@ public class MathGame : MonoBehaviour
         }
 
         _debugText.gameObject.SetActive(false);
+        _input.readOnly = true;
+
+        _checkAnswerButton.interactable = false;
         _playerAnswer = int.Parse(_input.text.ToString());
         if (_playerAnswer == _correctAnswer)
         {
             _answerText.SetText(_playerAnswer.ToString());
             _score += 5;
+            AudioManager.Instance.PlayCorrectSound();
         }
         else
         {
             _answerText.SetText(_correctAnswer.ToString());
             _answerText.color = new Color(200,0, 0);
             _score -= 3;
+            AudioManager.Instance.PlayIncorrectSound();
         }
 
         _scoreText.SetText(_score.ToString());

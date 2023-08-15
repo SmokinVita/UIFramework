@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pageCloseClip;
     [SerializeField] private AudioClip _selectClip;
+    [SerializeField] private AudioClip _incorrectClip;
+    [SerializeField] private AudioClip _correctClip;
 
     private void Awake()
     {
@@ -30,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
         if (_instance != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -43,6 +45,18 @@ public class AudioManager : MonoBehaviour
     public void PlaySelectClip()
     {
         _audioSource.clip = _selectClip;
+        _audioSource.Play();
+    }
+
+    public void PlayIncorrectSound()
+    {
+        _audioSource.clip = _incorrectClip;
+        _audioSource.Play();
+    }
+
+    public void PlayCorrectSound()
+    {
+        _audioSource.clip = _correctClip;
         _audioSource.Play();
     }
 
