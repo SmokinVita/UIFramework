@@ -19,6 +19,7 @@ public class MatchItem : MonoBehaviour
     private bool _isTimerActive = false;
     private float _seconds;
     private int _minutes;
+    private bool _openedWinScene = false;
 
 
     //WinScreen
@@ -31,13 +32,12 @@ public class MatchItem : MonoBehaviour
 
     private void Start()
     {
+        _openedWinScene = false;
         _isTimerActive = true;
         if (_itemSpawner == null)
         {
             Debug.LogError("Item Spawn is NULL!");
         }
-
-
 
     }
 
@@ -86,7 +86,11 @@ public class MatchItem : MonoBehaviour
         if (_isTimerActive == false)
         {
             _finalTime = _minutes + _seconds;
-            GameWon();
+            if (_openedWinScene == false)
+            {
+                _openedWinScene = true;
+                GameWon();
+            }
             return;
         }
 

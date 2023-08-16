@@ -50,6 +50,7 @@ public class MathGame : MonoBehaviour
         _input.readOnly = false;
 
         _checkAnswerButton.interactable = true;
+        _answerText.color = Color.black;
     }
 
     public void CheckAnswer()
