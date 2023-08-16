@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     public string ReturnCurrentProfile()
     {
-        Debug.Log("Returned: " +  _currentProfile);
         return _currentProfile;
     }
 

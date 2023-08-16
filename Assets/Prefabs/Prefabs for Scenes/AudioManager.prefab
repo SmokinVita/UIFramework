@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6550302525495439508
 MonoBehaviour:
@@ -51,6 +51,12 @@ MonoBehaviour:
   _selectClip: {fileID: 8300000, guid: 0ebfbaa025300ff408862d14380c8a85, type: 3}
   _incorrectClip: {fileID: 8300000, guid: 19b6f025410254c4fbf0e096ade8a770, type: 3}
   _correctClip: {fileID: 8300000, guid: b6a604edad31c2849bceafae107e375c, type: 3}
+  _buttonSelectionClips:
+  - {fileID: 8300000, guid: d55b1fccfc7b44d44ad885d7d418b915, type: 3}
+  - {fileID: 8300000, guid: 393fea5edb64e1140bcf2598652db189, type: 3}
+  - {fileID: 8300000, guid: b7a7744fc77be9244a15bbc1d02c1c4d, type: 3}
+  - {fileID: 8300000, guid: 1b0792518f857e64987539d13776d89b, type: 3}
+  - {fileID: 8300000, guid: 50d10875e2c74b74f91f85a766039cf5, type: 3}
 --- !u!82 &5200320724758876003
 AudioSource:
   m_ObjectHideFlags: 0
@@ -61,7 +67,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3551434051852900419, guid: d7e63c2cb05772f48bd8dd5e4bbd91c6, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 50d10875e2c74b74f91f85a766039cf5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -49,6 +49,7 @@ public class MathGame : MonoBehaviour
         _input.text = "";
         _input.readOnly = false;
 
+        _nextAnswerButton.interactable = false;
         _checkAnswerButton.interactable = true;
         _answerText.color = Color.black;
     }
@@ -88,6 +89,8 @@ public class MathGame : MonoBehaviour
             _finalScore = _score;
             GameOver();
         }
+
+        _nextAnswerButton.interactable = true;
     }
 
     private void GameOver()

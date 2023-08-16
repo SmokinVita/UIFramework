@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _selectClip;
     [SerializeField] private AudioClip _incorrectClip;
     [SerializeField] private AudioClip _correctClip;
+    [SerializeField] private AudioClip[] _buttonSelectionClips;
 
     private void Awake()
     {
@@ -34,6 +35,13 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+       /* _audioSource = GameObject.Find("SFXSource").GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.Log("Cant findAudiosource");
+        }*/
+
     }
 
     public void PlayClosePanelSound()
@@ -57,6 +65,13 @@ public class AudioManager : MonoBehaviour
     public void PlayCorrectSound()
     {
         _audioSource.clip = _correctClip;
+        _audioSource.Play();
+    }
+
+    public void ButtonSelectionSound()
+    {
+        var randomSound = Random.Range(0, _buttonSelectionClips.Length);
+        _audioSource.clip = _buttonSelectionClips[randomSound];
         _audioSource.Play();
     }
 
