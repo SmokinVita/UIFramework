@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -65,5 +66,15 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int sceneId)
     {
         SceneManager.LoadScene(sceneId);
+    }
+
+    public void QuitGame()
+    {
+        if (Application.isEditor)
+        {
+            Debug.Log("Tried to quit game in Editor!!");
+        }
+        else
+            Application.Quit();
     }
 }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ed1d2db809aad4e85af2f257ce5cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 5200320724758876003}
+  _audioSource: {fileID: 0}
   _pageCloseClip: {fileID: 8300000, guid: 72a00eb4ba8774c4da96a9e5e7ce33ae, type: 3}
   _selectClip: {fileID: 8300000, guid: 0ebfbaa025300ff408862d14380c8a85, type: 3}
   _incorrectClip: {fileID: 8300000, guid: 19b6f025410254c4fbf0e096ade8a770, type: 3}
@@ -67,7 +67,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3551434051852900419, guid: d7e63c2cb05772f48bd8dd5e4bbd91c6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 50d10875e2c74b74f91f85a766039cf5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1b0792518f857e64987539d13776d89b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

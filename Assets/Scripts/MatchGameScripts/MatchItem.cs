@@ -68,6 +68,7 @@ public class MatchItem : MonoBehaviour
             _item1 = null;
             _item2 = null;
 
+            AudioManager.Instance.PlayCorrectSound();
             _matchedItems++;
             if (_matchedItems == _itemSpawner.PairsToWin())
             {
@@ -78,6 +79,7 @@ public class MatchItem : MonoBehaviour
         else if (_item1.name != _item2.name)
         {
             StartCoroutine(CoverRoutine());
+            AudioManager.Instance.PlayIncorrectSound();
         }
     }
 

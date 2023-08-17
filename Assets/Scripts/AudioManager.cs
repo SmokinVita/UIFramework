@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -35,13 +36,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-       /* _audioSource = GameObject.Find("SFXSource").GetComponent<AudioSource>();
-        if (_audioSource == null)
-        {
-            Debug.Log("Cant findAudiosource");
-        }*/
-
     }
 
     public void PlayClosePanelSound()

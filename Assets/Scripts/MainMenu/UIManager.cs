@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.EventSystems;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _musicSlider;
+
+    private string _profileSelected;
 
 
     private void Awake()
@@ -110,4 +112,6 @@ public class UIManager : MonoBehaviour
         Debug.Log(profile.name);
         GameManager.Instance.LoadProfile(profile.GetComponentInChildren<TMP_Text>().text);
     }
+
+    
 }

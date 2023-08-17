@@ -27,8 +27,12 @@ public class Drop : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<Drag>()._startPOS = _image.rectTransform.position;
             _game.Points(3, false);
             _game.CorrectSelection();
+            AudioManager.Instance.PlayCorrectSound();
         }
         else
+        {
             _game.Points(-2, true);
+            AudioManager.Instance.PlayIncorrectSound();
+        }
     }
 }
