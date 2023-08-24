@@ -14,7 +14,7 @@ public class Item : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
-        _itemMatch = GameObject.Find("Game1-MatchGame").GetComponent<MatchItem>();
+        _itemMatch = GameObject.Find("GameBehaviour").GetComponent<MatchItem>();
         if (_itemMatch == null)
             Debug.LogError("MatchItem is null");
     }

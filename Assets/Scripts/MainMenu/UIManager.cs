@@ -28,25 +28,26 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text _text;
     [SerializeField] private string _selectedProfile;
     [SerializeField] private TMP_Text _profileDebugText;
+    [SerializeField] private GameObject _profileSelectionPage;
     [SerializeField] private GameObject _profilePage;
+    [SerializeField] private GameObject _profileListPage;
     [SerializeField] private LoadProfileList _loadProfileList;
 
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private Slider _musicSlider;
 
-    private string _profileSelected;
-
-
     private void Awake()
     {
-        _instance = this;    
+        _instance = this;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         _profileDebugText.SetText("");
+        _loadProfileList.GameStarted();
     }
 
     public void LoadGameSelectionMenu()
@@ -97,20 +98,22 @@ public class UIManager : MonoBehaviour
 
         //Calls Gamemanager Create Profile, add's profile name to Load Profile page. Clear's out inputfield text. 
         GameManager.Instance.CreateProfile(_inputField.text);
-        _loadProfileList.CreatedProfile(_inputField.text);
-        Debug.Log($"New Profile " + _inputField.text);
+        _loadProfileList.CreatedProfileList(_inputField.text);
         _inputField.text = "";
         
         //clear's out debug text, than disables Profile Page and activates Title Page
         _profileDebugText.SetText("");
-        _profilePage.SetActive(false);
+        _profileSelectionPage.SetActive(false);
         _titlePage.SetActive(true);
     }
 
-    public void LoadProfile(GameObject profile)
+    public void LoadProfile(int selectedIndex)
     {
-        Debug.Log(profile.name);
-        GameManager.Instance.LoadProfile(profile.GetComponentInChildren<TMP_Text>().text);
+        GameManager.Instance.LoadProfile(selectedIndex);
+        _profileSelectionPage.SetActive(false);
+        _profileListPage.SetActive(false);
+        _profilePage.SetActive(true);
+        _titlePage.SetActive(true);
     }
 
     

@@ -29,7 +29,10 @@ public class ButtonManager : MonoBehaviour
             button.onClick.AddListener(() => { AudioManager.Instance.ButtonSelectionSound(); });
         }
 
-        _quitGameButton.onClick.AddListener(() => { GameManager.Instance.QuitGame(); });
+        if (_quitGameButton != null)
+        {
+            _quitGameButton.onClick.AddListener(() => { GameManager.Instance.QuitGame(); });
+        }
     }
 
     private void OnDisable()

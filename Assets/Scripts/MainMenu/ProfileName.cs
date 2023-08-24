@@ -6,8 +6,11 @@ using UnityEngine.EventSystems;
 
 public class ProfileName : MonoBehaviour, IPointerClickHandler
 {
+
+    public int index;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIManager.Instance.LoadProfile(eventData.pointerClick.gameObject);
+        UIManager.Instance.LoadProfile(index);
     }
 }

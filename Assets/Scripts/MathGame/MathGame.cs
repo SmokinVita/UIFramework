@@ -107,7 +107,7 @@ public class MathGame : MonoBehaviour
         }
         else
         {
-            _highscoreText.SetText(_highscoreText.ToString());
+            _highscoreText.SetText($"{_highscore}");
         }
     }
 

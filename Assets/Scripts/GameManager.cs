@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     private List<string> _profiles = new List<string>();
     [SerializeField] private string _currentProfile;
+    private int _currentProfileIndex;
 
     private void Awake()
     {
@@ -35,17 +36,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _currentProfileIndex = PlayerPrefs.GetInt("CurrentAmountOfProfiles");
+        for (int i = 0; i < _currentProfileIndex; i++)
+        {
+            if (PlayerPrefs.HasKey($"ProfileName{i}") == true)
+            {
+                _profiles.Add(PlayerPrefs.GetString($"ProfileName{i}"));
+            }
+        }
+    }
+
     public void CreateProfile(string profile)
     {
-        PlayerPrefs.SetString(profile, profile);
-        _profiles.Add(profile);
+        PlayerPrefs.SetString($"ProfileName{_currentProfileIndex}", profile);
+        _currentProfileIndex++;
         _currentProfile = profile;
     }
 
-    public void LoadProfile(string profile)
+    public void LoadProfile(int selectedIndex)
     {
-        PlayerPrefs.GetString(profile, profile);
-        _currentProfile = profile;
+        _currentProfile = PlayerPrefs.GetString($"ProfileName{selectedIndex}");
     }
 
     public List<string> GetAllProfiles()
@@ -68,13 +80,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneId);
     }
 
+
     public void QuitGame()
     {
         if (Application.isEditor)
         {
             Debug.Log("Tried to quit game in Editor!!");
+            PlayerPrefs.SetInt("CurrentAmountOfProfiles", _currentProfileIndex);
         }
         else
+        {
+            PlayerPrefs.SetInt("CurrentAmountOfProfiles", _currentProfileIndex);
             Application.Quit();
+        }
     }
 }
