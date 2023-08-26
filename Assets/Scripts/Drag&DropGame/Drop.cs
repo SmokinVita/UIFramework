@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ public class Drop : MonoBehaviour, IDropHandler
         if (eventData.pointerDrag.name == _hiraganaNeeded)
         {
             eventData.pointerDrag.GetComponent<Drag>()._startPOS = _image.rectTransform.position;
+            eventData.pointerDrag.GetComponent<Drag>()._isInCorrectAnswer = true;
             _game.Points(3, false);
             _game.CorrectSelection();
             AudioManager.Instance.PlayCorrectSound();

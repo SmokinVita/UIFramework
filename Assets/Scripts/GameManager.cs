@@ -51,8 +51,10 @@ public class GameManager : MonoBehaviour
     public void CreateProfile(string profile)
     {
         PlayerPrefs.SetString($"ProfileName{_currentProfileIndex}", profile);
+        PlayerPrefs.Save();
+        _currentProfile = PlayerPrefs.GetString($"ProfileName{_currentProfileIndex}");
         _currentProfileIndex++;
-        _currentProfile = profile;
+        
     }
 
     public void LoadProfile(int selectedIndex)

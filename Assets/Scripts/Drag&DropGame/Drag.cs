@@ -8,6 +8,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 {
     private TMP_Text _text;
     [SerializeField] public Vector3 _startPOS;
+    public bool _isInCorrectAnswer = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,10 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         var tempColor = _text.color;
         tempColor.a = 1f;
         _text.color = tempColor;
-        _text.raycastTarget = true;
+
+        if (_isInCorrectAnswer == true)
+            _text.raycastTarget = false;
+        else
+            _text.raycastTarget = true;
     }
 }

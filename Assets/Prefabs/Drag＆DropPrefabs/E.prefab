@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183811edb3ad86a4383a9b01044c732f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _game: {fileID: 0}
   _hiraganaNeeded: "\u3048"
 --- !u!1 &2763265293488446868
 GameObject:
