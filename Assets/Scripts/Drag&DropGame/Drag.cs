@@ -14,7 +14,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     void Start()
     {
         _text = GetComponent<TMP_Text>();
-        _startPOS = _text.rectTransform.position;
+        _startPOS = _text.transform.position;
     }
 
     private void ResetPosition()
